@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $usuario = User::select('*')->get();
-        return $usuario;
+        return User::all();
     }
 
     public function store(Request $request)
@@ -27,7 +27,8 @@ class UserController extends Controller
 
     public function show($id)
     {
-        //
+        $user = User::select('*')->where('id', $id)->first();
+        return $user;
     }
 
     public function edit($id)
