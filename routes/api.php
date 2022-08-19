@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BebidasController;
 use App\Http\Controllers\Api\LanchesController;
+use App\Http\Controllers\Api\PedidosController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,4 @@ Route::middleware('auth:api')->group(function () {
 Route::apiResource('/usuarios', UserController::class);
 Route::apiResource('/lanches', LanchesController::class);
 Route::apiResource('/bebidas', BebidasController::class);
+Route::apiResource('/pedidos', PedidosController::class);
