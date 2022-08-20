@@ -7,7 +7,12 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "post-install-cmd": [ 
+            "php artisan clear-compiled",
+            "chmod -R 777 storage", 
+            "php artisan passport:keys"
+        ]
     },
     "devDependencies": {
         "axios": "^0.21",
