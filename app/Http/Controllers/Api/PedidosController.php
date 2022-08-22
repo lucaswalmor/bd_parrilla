@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Pedidos;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class PedidosController extends Controller
 {
@@ -19,7 +20,9 @@ class PedidosController extends Controller
         $pedidos = Pedidos::all();
         $array_pedidos = [];
         array_push($array_pedidos, ['somas' => $somas, 'pedidos' => $pedidos]);
+        
         return $array_pedidos;
+
     }
     
     public function store(Request $request)
@@ -28,7 +31,7 @@ class PedidosController extends Controller
     }
 
     public function show($id)
-    {
+    {        
         $pedido = Pedidos::select('*')->where('id', $id)->first();
         return $pedido;
     }

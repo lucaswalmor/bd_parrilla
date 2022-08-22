@@ -16,12 +16,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if($request->is('api/*')) {
-            throw new HttpResponseException(response(200));  
-        }
-        if (!$request->expectsJson()) {
-            session()->flash('message', 'Exceeded an inactivity period of over 15 mins. Kindly re-login to continue'); 
-            return route('login');
-        }
+        return route('login');
     }
 }
