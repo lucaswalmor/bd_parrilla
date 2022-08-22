@@ -16,7 +16,7 @@ class CreateTaxaEntregasTable extends Migration
         Schema::create('taxa_entregas', function (Blueprint $table) {
             $table->id();
             $table->string('bairro');
-            $table->string('preco');
+            $table->string('preco')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
