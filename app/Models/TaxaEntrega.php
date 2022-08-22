@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Lanche extends Model
+class TaxaEntrega extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nome',
-        'preco',
-        'foto'
+        'bairro',
+        'preco'
     ];
 }

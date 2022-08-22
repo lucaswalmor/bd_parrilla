@@ -20,12 +20,31 @@ class LanchesController extends Controller
 
     public function store(Request $request)
     {
-        Lanche::create($request->all());
+        $dados = $request->all();
+        Lanche::create($dados);
+        // if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            
+        //     // Define um aleatório para o arquivo baseado no timestamps atual
+        //     $name = uniqid(date('HisYmd'));
+    
+        //     // Recupera a extensão do arquivo
+        //     $extension = $request->foto->extension();
+    
+        //     // Define finalmente o nome
+        //     $nameFile = "{$name}.{$extension}";
+    
+        //     // Faz o upload:
+        //     $upload = $request->foto->storeAs('categories', $nameFile);
+        //     Lanche::create([
+        //         'nome' => $dados['nome'],
+        //         'preco' => $dados['preco'],
+        //         'foto' => $nameFile,
+        //     ]);
+        // }
     }
 
     public function show($id)
     {
-        //
         $lanche = Lanche::select('*')->where('id', $id)->first();
         return $lanche;
     }
