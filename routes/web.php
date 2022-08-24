@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\teste;
+use App\Models\Lanche;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $fotos = Lanche::all();
+    return view('welcome', compact('fotos'));
 });

@@ -10,6 +10,7 @@ class Pedidos extends Model
     use HasFactory;
     protected $fillable = [
         'nome_cliente',
+        'cpf',
         'rua',
         'bairro',
         'apartamento',

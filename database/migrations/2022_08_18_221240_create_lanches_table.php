@@ -17,6 +17,8 @@ class CreateLanchesTable extends Migration
             $table->id();
             $table->string('nome');
             $table->string('preco');
+            $table->string('foto')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

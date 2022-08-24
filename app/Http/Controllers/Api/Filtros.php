@@ -37,24 +37,41 @@ class Filtros extends Controller
     public function store(Request $request)
     {
         $dados = $request->all();
-
-        if($dados['nome'] == 'dia') {
+        if($dados['filtro_valores'] == 'dia') {
             $pedido = DB::table('pedidos')
                 ->select('valor_total')
                 ->whereDay('created_at', $dados['data'])
-                ->get();
+                ->sum('valor_total');
             return $pedido;
-        } else if($dados['nome'] == 'mes') {
+        } else if($dados['filtro_valores'] == 'mes') {
             $pedido = DB::table('pedidos')
                 ->select('valor_total')
                 ->whereMonth('created_at', $dados['data'])
-                ->get();
+                ->sum('valor_total');
             return $pedido;
-        } else if($dados['nome'] == 'ano') {
+        } else if($dados['filtro_valores'] == 'ano') {
             $pedido = DB::table('pedidos')
                 ->select('valor_total')
                 ->whereYear('created_at', $dados['data'])
-                ->get();
+                ->sum('valor_total');
+            return $pedido;
+        } else if($dados['filtro_total_pedidos'] == 'dia_pedido') {
+            $pedido = DB::table('pedidos')
+                ->select('id')
+                ->whereDay('created_at', $dados['data'])
+                ->count();
+            return $pedido;
+        } else if($dados['filtro_total_pedidos'] == 'mes_pedido') {
+            $pedido = DB::table('pedidos')
+                ->select('id')
+                ->whereMonth('created_at', $dados['data'])
+                ->count();
+            return $pedido;
+        } else if($dados['filtro_total_pedidos'] == 'ano_pedido') {
+            $pedido = DB::table('pedidos')
+                ->select('id')
+                ->whereYear('created_at', $dados['data'])
+                ->count();
             return $pedido;
         } else {
             return response('fail', 400);

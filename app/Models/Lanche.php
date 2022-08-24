@@ -11,6 +11,7 @@ class Lanche extends Model
     protected $fillable = [
         'nome',
         'preco',
-        'foto'
+        'foto',
+        'path'
     ];
 }
