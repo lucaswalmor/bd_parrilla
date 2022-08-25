@@ -39,21 +39,27 @@ class Filtros extends Controller
         $dados = $request->all();
         if($dados['filtro_valores'] == 'dia') {
             $pedido = DB::table('pedidos')
-                ->select('valor_total')
+                // ->select('valor_total')
+                ->select(DB::raw('SUM(valor_total) as total'))
                 ->whereDay('created_at', $dados['data'])
-                ->sum('valor_total');
+                // ->sum('valor_total');
+                ->get();
             return $pedido;
         } else if($dados['filtro_valores'] == 'mes') {
             $pedido = DB::table('pedidos')
-                ->select('valor_total')
+                // ->select('valor_total')
+                ->select(DB::raw('SUM(valor_total) as total'))
                 ->whereMonth('created_at', $dados['data'])
-                ->sum('valor_total');
+                // ->sum('valor_total');
+                ->get();
             return $pedido;
         } else if($dados['filtro_valores'] == 'ano') {
             $pedido = DB::table('pedidos')
-                ->select('valor_total')
+                // ->select('valor_total')
+                ->select(DB::raw('SUM(valor_total) as total'))
                 ->whereYear('created_at', $dados['data'])
-                ->sum('valor_total');
+                // ->sum('valor_total');
+                ->get();
             return $pedido;
         } else if($dados['filtro_total_pedidos'] == 'dia_pedido') {
             $pedido = DB::table('pedidos')
