@@ -21,27 +21,25 @@ class LanchesController extends Controller
     public function store(Request $request)
     {
         $dados = $request->all();
-        if(!empty($dados['foto'])) {
-            if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-                // Define um aleatório para o arquivo baseado no timestamps atual
-                $name = uniqid(date('HisYmd'));
-        
-                // Recupera a extensão do arquivo
-                $extension = $request->foto->extension();
-        
-                // Define finalmente o nome
-                $nameFile = "{$name}.{$extension}";
-        
-                // Faz o upload:
-                $path = $request->foto->storeAs('public/fotos_lanches/'.$dados['nome'].'/', $nameFile);
+        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
+            // Define um aleatório para o arquivo baseado no timestamps atual
+            $name = uniqid(date('HisYmd'));
     
-                Lanche::create([
-                    'nome' => $dados['nome'],
-                    'preco' => $dados['preco'],
-                    'foto' => $nameFile,
-                    'path' => $path
-                ]);
-            }
+            // Recupera a extensão do arquivo
+            $extension = $request->foto->extension();
+    
+            // Define finalmente o nome
+            $nameFile = "{$name}.{$extension}";
+    
+            // Faz o upload:
+            $path = $request->foto->storeAs('public/fotos_lanches/'.$dados['nome'].'/', $nameFile);
+
+            Lanche::create([
+                'nome' => $dados['nome'],
+                'preco' => $dados['preco'],
+                'foto' => $nameFile,
+                'path' => $path
+            ]);
         } else {
             Lanche::create([
                 'nome' => $dados['nome'],
