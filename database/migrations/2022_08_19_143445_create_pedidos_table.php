@@ -24,7 +24,7 @@ class CreatePedidosTable extends Migration
             $table->string('telefone');
             $table->string('lanche');
             $table->string('observacoes')->nullable();
-            $table->string('valor_total');
+            $table->double('valor_total');
             $table->string('troco')->nullable();
             $table->string('forma_pagamento');
             $table->timestamps();
