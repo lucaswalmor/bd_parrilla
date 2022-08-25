@@ -22,7 +22,6 @@ class LanchesController extends Controller
     {
         $dados = $request->all();
         if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-            
             // Define um aleatório para o arquivo baseado no timestamps atual
             $name = uniqid(date('HisYmd'));
     
@@ -41,6 +40,12 @@ class LanchesController extends Controller
                 'foto' => $nameFile,
                 'path' => $path
             ]);
+        } else {
+            Lanche::create([
+                'nome' => $dados['nome'],
+                'preco' => $dados['preco'],
+            ]);
+
         }
     }
 
