@@ -37,6 +37,7 @@ class Filtros extends Controller
     public function store(Request $request)
     {
         $dados = $request->all();
+
         if($dados['filtro_valores'] == 'dia') {
             $pedido = DB::table('pedidos')
                 ->select('valor_total')
@@ -73,9 +74,30 @@ class Filtros extends Controller
                 ->whereYear('created_at', $dados['data'])
                 ->count();
             return $pedido;
+        } else if(!empty($dados['cpf']) && $dados['compra_cliente_dia'] == 'mes') {
+            $cliente = DB::table('pedidos')
+                ->select('cpf')
+                ->whereMonth('created_at', $dados['data'])
+                ->sum('valor_total');
+            return $cliente;
+        } else if(!empty($dados['cpf']) && $dados['compra_cliente_dia'] == 'ano') {
+            $cliente = DB::table('pedidos')
+                ->select('cpf')
+                ->whereYear('created_at', $dados['data'])
+                ->sum('valor_total');
+            return $cliente;
+        } else if(!empty($dados['cpf'])) {
+            $cliente = DB::table('pedidos')
+                ->select('*')
+                ->where('cpf', $dados['cpf'])
+                ->get();
+            return $cliente;
         } else {
             return response('fail', 400);
         }
+        
+        // filtrar soma total de compra de um cliente 
+        
     }
 
     /**
