@@ -86,10 +86,10 @@ class Filtros extends Controller
                 ->whereYear('created_at', $dados['data'])
                 ->sum('valor_total');
             return $cliente;
-        } else if(!empty($dados['cpf'])) {
+        } else if(!empty($dados['cpf_cliente'])) {
             $cliente = DB::table('pedidos')
                 ->select('*')
-                ->where('cpf', $dados['cpf'])
+                ->where('cpf', $dados['cpf_cliente'])
                 ->get();
             return $cliente;
         } else {
