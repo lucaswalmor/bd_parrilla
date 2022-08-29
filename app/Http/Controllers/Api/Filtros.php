@@ -15,7 +15,64 @@ class Filtros extends Controller
      */
     public function index()
     {
-        //
+        $mes = date('m');
+        $somas_janeiro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '01')
+            ->sum('valor_total');
+        $somas_fevereiro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '02')
+            ->sum('valor_total');
+        $somas_marco = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '03')
+            ->sum('valor_total');
+        $somas_abril = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '04')
+            ->sum('valor_total');
+        $somas_maio = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '05')
+            ->sum('valor_total');
+        $somas_junho = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '06')
+            ->sum('valor_total');
+        $somas_julho = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '07')
+            ->sum('valor_total');
+        $somas_agosto = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '08')
+            ->sum('valor_total');
+        $somas_setembro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '09')
+            ->sum('valor_total');
+        $somas_outubro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '10')
+            ->sum('valor_total');
+        $somas_novembro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '11')
+            ->sum('valor_total');
+        $somas_dezembro = DB::table('pedidos')
+            ->select('*')
+            ->whereMonth('created_at', '12')
+            ->sum('valor_total');
+            
+        $somas = [];
+        array_push($somas, [
+            $somas_janeiro, $somas_fevereiro, $somas_marco, 
+            $somas_abril, $somas_maio, $somas_junho, 
+            $somas_julho, $somas_agosto, $somas_setembro,
+            $somas_outubro, $somas_novembro, $somas_dezembro
+        ]);
+        return $somas;
     }
 
     /**
