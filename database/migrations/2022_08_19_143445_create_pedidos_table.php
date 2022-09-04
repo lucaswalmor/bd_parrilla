@@ -19,6 +19,7 @@ class CreatePedidosTable extends Migration
             $table->string('cpf');
             $table->string('rua');
             $table->string('bairro');
+            $table->string('ponto_referencia')->nullable();
             $table->string('apartamento')->nullable();
             $table->string('bloco')->nullable();
             $table->string('telefone');
