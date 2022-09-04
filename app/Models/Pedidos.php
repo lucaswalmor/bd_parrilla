@@ -13,6 +13,7 @@ class Pedidos extends Model
         'cpf',
         'rua',
         'bairro',
+        'ponto_referencia',
         'apartamento',
         'bloco',
         'telefone',
