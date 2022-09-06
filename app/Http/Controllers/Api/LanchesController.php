@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Lanche;
+use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class LanchesController extends Controller
 {
@@ -15,42 +17,31 @@ class LanchesController extends Controller
      */
     public function index()
     {
-        return Lanche::all();
+        $lanches = DB::table('lanches')
+            ->join('uploads', 'lanches.id', '=', 'uploads.lanche_id')
+            ->get();
+        return $lanches;
+        // return Lanche::all();
     }
 
     public function store(Request $request)
     {
         $dados = $request->all();
-        if ($request->hasFile('foto') && $request->file('foto')->isValid()) {
-            // Define um aleatório para o arquivo baseado no timestamps atual
-            $name = uniqid(date('HisYmd'));
-    
-            // Recupera a extensão do arquivo
-            $extension = $request->foto->extension();
-    
-            // Define finalmente o nome
-            $nameFile = "{$name}.{$extension}";
-    
-            // Faz o upload:
-            $path = $request->foto->storeAs('public/fotos_lanches/'.$dados['nome'].'/', $nameFile);
 
-            Lanche::create([
-                'nome' => $dados['nome'],
-                'preco' => $dados['preco'],
-                'foto' => $nameFile,
-                'path' => $path
-            ]);
-        } else {
-            Lanche::create([
-                'nome' => $dados['nome'],
-                'preco' => $dados['preco'],
-            ]);
-        }
+        Lanche::create([
+            'nome' => $dados['nome'],
+            'preco' => $dados['preco'],
+            // 'ingredientes' => $dados['ingredientes'],
+            'ingredientes' => implode(', ', $dados['ingredientes']),
+        ]);
     }
 
     public function fotos() {
-        $fotos = Lanche::all();
-        return view('welcome', compact('fotos'));
+        $lanches = DB::table('lanches')
+        ->join('uploads', 'lanches.id', '=', 'uploads.lanche_id')
+        ->get();
+
+        return view('welcome', compact('lanches'));
     }
 
     public function show($id)

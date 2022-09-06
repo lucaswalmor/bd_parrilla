@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLanchesTable extends Migration
+class CreateUploadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateLanchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('lanches', function (Blueprint $table) {
+        Schema::create('uploads', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('preco');
-            $table->string('ingredientes');
+            $table->string('image');
+            $table->string('path');
+            $table->unsignedBigInteger('lanche_id');
+            $table->foreign('lanche_id')->references('id')->on('lanches')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateLanchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lanches');
+        Schema::dropIfExists('uploads');
     }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\teste;
 use App\Models\Lanche;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $fotos = Lanche::all();
-    return view('welcome', compact('fotos'));
+    $lanches = DB::table('lanches')
+    ->join('uploads', 'lanches.id', '=', 'uploads.lanche_id')
+    ->get();
+    
+    return view('welcome', compact('lanches'));
 });
