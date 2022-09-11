@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUploadsTable extends Migration
+class CreateUploadFotoBebidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateUploadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('uploads', function (Blueprint $table) {
+        Schema::create('upload_foto_bebidas', function (Blueprint $table) {
             $table->id();
             $table->string('image');
             $table->string('path');
-            $table->unsignedBigInteger('lanche_id');
-            $table->foreign('lanche_id')->references('id')->on('lanches')->onDelete('cascade');
+            $table->unsignedBigInteger('bebida_id');
+            $table->foreign('bebida_id')->references('id')->on('bebidas')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,6 @@ class CreateUploadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('uploads');
+        Schema::dropIfExists('upload_foto_bebidas');
     }
 }

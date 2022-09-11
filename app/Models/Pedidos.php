@@ -21,6 +21,7 @@ class Pedidos extends Model
         'observacoes',
         'valor_total',
         'troco',
+        'codigo_pedido',
         'forma_pagamento'
     ];
 }

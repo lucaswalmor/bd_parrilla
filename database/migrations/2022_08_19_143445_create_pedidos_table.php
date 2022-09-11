@@ -16,6 +16,7 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->string('nome_cliente');
+            $table->string('codigo_pedido');
             $table->string('cpf');
             $table->string('rua');
             $table->string('bairro');
@@ -23,12 +24,11 @@ class CreatePedidosTable extends Migration
             $table->string('apartamento')->nullable();
             $table->string('bloco')->nullable();
             $table->string('telefone');
-            $table->string('lanche');
-            $table->string('observacoes')->nullable();
             $table->double('valor_total');
             $table->string('troco')->nullable();
             $table->string('forma_pagamento');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

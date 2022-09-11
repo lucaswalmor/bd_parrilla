@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Bebida;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 
 class BebidasController extends Controller
 {
@@ -15,7 +16,10 @@ class BebidasController extends Controller
      */
     public function index()
     {
-        return Bebida::all();
+        $bebidas = DB::table('bebidas')
+            ->join('upload_foto_bebidas as B', 'bebidas.id', '=', 'B.bebida_id')
+            ->get();
+        return $bebidas;
     }
 
     public function store(Request $request)
